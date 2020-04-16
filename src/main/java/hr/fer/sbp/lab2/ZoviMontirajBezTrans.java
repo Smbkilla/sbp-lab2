@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class ZoviMontirajBezTrans {
 
 	public static void main(String[] args) {
-		final Connection connection = openConnection();
 		final Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Upišite šifru alata");
@@ -21,6 +20,11 @@ public class ZoviMontirajBezTrans {
 		final String machineId = scanner.nextLine().trim();
 
 		scanner.close();
+		zoviMontirajBezTrans(toolId, machineId);
+	}
+
+	public static void zoviMontirajBezTrans(final int toolId, final String machineId) {
+		final Connection connection = openConnection();
 
 		try {
 			final CallableStatement cstmt = connection.prepareCall("{call dbo.montirajBezTrans(?, ?)}");

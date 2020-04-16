@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class MontirajUzTrans {
 
 	public static void main(String[] args) {
-		final Connection connection = openConnection();
 		final Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Upišite šifru alata");
@@ -19,11 +18,16 @@ public class MontirajUzTrans {
 
 		scanner.close();
 
+		montirajUzTrans(toolId, machineId);
+	}
+
+	public static void montirajUzTrans(final int toolId, final String machineId) {
+		final Connection connection = openConnection();
 
 		try {
 			connection.setAutoCommit(false);
 
-			final PreparedStatement insertMontazaStatement = connection.prepareCall("INSERT INTO montaza VALUES (?, ?)");
+			final PreparedStatement insertMontazaStatement = connection.prepareCall("INSERT INTO montaza (sifAlat, oznStroj) VALUES (?, ?)");
 
 
 			insertMontazaStatement.setInt(1, toolId);

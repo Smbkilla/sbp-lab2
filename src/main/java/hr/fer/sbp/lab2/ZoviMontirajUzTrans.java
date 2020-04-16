@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class ZoviMontirajUzTrans {
 
 	public static void main(String[] args) {
-		final Connection connection = openConnection();
 		final Scanner scanner = new Scanner(System.in);
 
 		System.out.println("Upišite šifru alata");
@@ -19,6 +18,11 @@ public class ZoviMontirajUzTrans {
 
 		scanner.close();
 
+		zoviMontirajUzTrans(toolId, machineId);
+	}
+
+	public static void zoviMontirajUzTrans(final int toolId, final String machineId) {
+		final Connection connection = openConnection();
 
 		try {
 			final CallableStatement cstmt = connection.prepareCall("{call dbo.montirajUzTrans(?, ?)}");
