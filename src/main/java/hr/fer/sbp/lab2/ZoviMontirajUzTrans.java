@@ -33,20 +33,18 @@ public class ZoviMontirajUzTrans {
 			cstmt.setString(2, machineId);
 
 			try {
-				cstmt.execute();
+				cstmt.executeQuery();
 
-				cstmt.getMoreResults();
-				cstmt.getMoreResults();
-				cstmt.getMoreResults();
-				cstmt.getMoreResults();
-				cstmt.getMoreResults();
-
-				System.out.println("Alat je montiran");
+			} catch (SQLException exception) {
+				if (exception.getErrorCode() == 0) {
+					System.out.println("Alat je montiran");
+				} else {
+					printError(exception);
+					System.exit(-1);
+				}
+			} finally {
 				cstmt.close();
 				connection.close();
-			} catch (SQLException exception) {
-				printError(exception);
-				System.exit(-1);
 			}
 		} catch (SQLException exception) {
 			printError(exception);
